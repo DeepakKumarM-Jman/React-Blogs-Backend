@@ -62,7 +62,8 @@ export const deleteUser = async (req, res) => {
 
 export const likeBlog = async (req, res) => {
   try {
-    const { id, blogId } = req.params;
+    const blogId = req.params.blogId;
+    const id = req.user._id;
 
     const user = await User.findById(id);
     if (!user) {
@@ -94,7 +95,7 @@ export const likeBlog = async (req, res) => {
 
 export const getFavorites = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate("likedBlogs");
+    const user = await User.findById(req.user._id).populate("likedBlogs");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

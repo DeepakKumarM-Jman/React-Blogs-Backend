@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minLength: 6,
     },
-    likedBlogs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blogs" }],
+    likedBlogs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
   },
   { timestamps: true }
 );

@@ -6,7 +6,7 @@ import Blog from "../models/blog.model.js";
  */
 export const getBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find().populate("author", "name email");
+    const blogs = await Blog.find().populate("author", "name");
     res.status(200).json({ success: true, data: blogs });
   } catch (error) {
     console.error(error);
@@ -20,7 +20,7 @@ export const getBlogs = async (req, res) => {
  */
 export const getBlog = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id).populate("author", "name email");
+    const blog = await Blog.findById(req.params.id).populate("author", "name");
     if (!blog) return res.status(404).json({ message: "Blog not found" });
 
     // Increment view count when a blog is retrieved
@@ -139,7 +139,7 @@ export const addComment = async (req, res) => {
 
 export const getPopularBlogs = async (req, res) => {
   try {
-    const popularBlogs = await Blog.find().sort({ views: -1 }).limit(5);
+    const popularBlogs = await Blog.find().populate("author", "name").sort({ views: -1 }).limit(5);
     res.status(200).json({ success: true, data: popularBlogs });
   } catch (error) {
     res.status(500).json({ message: "Error Fetching", error });
