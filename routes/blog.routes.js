@@ -1,8 +1,18 @@
 import { Router } from "express";
-import { getBlogs, getBlog, createBlog, updateBlog, deleteBlog, addComment } from "../controllers/blog.controller.js";
+import {
+  getBlogs,
+  getBlog,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+  addComment,
+  getPopularBlogs,
+} from "../controllers/blog.controller.js";
 import authorize from "../middleware/auth.middleware.js";
 
 const blogRouter = Router();
+
+blogRouter.get("/popular", getPopularBlogs);
 
 blogRouter.get("/", getBlogs);
 

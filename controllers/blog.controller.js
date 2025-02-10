@@ -136,3 +136,12 @@ export const addComment = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+export const getPopularBlogs = async (req, res) => {
+  try {
+    const popularBlogs = await Blog.find().sort({ views: -1 }).limit(5);
+    res.status(200).json({ success: true, data: popularBlogs });
+  } catch (error) {
+    res.status(500).json({ message: "Error Fetching", error });
+  }
+}
